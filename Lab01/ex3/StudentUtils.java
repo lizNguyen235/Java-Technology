@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StudentUtils {
     
@@ -85,7 +87,7 @@ public class StudentUtils {
      */
     public static double avg(List<Student> list)
     {
-        return 0;
+        return list.stream().mapToDouble(Student::average).average().orElse(0);
     }
 
     /**
@@ -94,6 +96,6 @@ public class StudentUtils {
      */
     public static List<String> goodStudentName(List<Student> list)
     {
-        return null;
+        return list.stream().filter(x -> x.average() >= 8).map(x -> x.name).collect(Collectors.toList());   
     } 
 }

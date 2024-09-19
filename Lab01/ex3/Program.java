@@ -20,8 +20,10 @@ public class Program {
          StudentUtils.sortByAgeDescending(list);
          StudentUtils.print(list);
         // @TODO: tính điểm trung bình của toàn bộ danh sách rồi in kết quả
-
+        System.out.println(StudentUtils.avg(list));
+        
        
         // @TODO: lấy danh sách TÊN học sinh giỏi rồi in kết quả
+         System.out.println(StudentUtils.goodStudentName(list));
     }
 }
