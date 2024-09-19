@@ -53,14 +53,7 @@ public class StudentUtils {
             }
             return 0;
         });
-        // Collections.sort(list, new Comparator<Student>() {
-        //     @Override
-        //     public int compare(Student o1, Student o2) {
-        //         if (o1.average() > o2.average()) return 1;
-        //         if (o1.average() < o2.average()) return -1;
-        //         return 0;
-        //     }
-        // });
+  
     }
 
     /**
