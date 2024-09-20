@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-//        if(args.length != 4){
-//            System.out.println("Please provide right an argument");
-//            return;
-//        }
-        ProductDAO productDAO = new ProductDAO("localhost", "ProductManagement", "postgres", "hung123");
+        if(args.length != 4){
+            System.out.println("Please provide right an argument");
+            return;
+        }
+        ProductDAO productDAO = new ProductDAO(args[0], args[1], args[2], args[3]);
         do {
             System.out.println("1. Add product");
             System.out.println("2. Display all products");
