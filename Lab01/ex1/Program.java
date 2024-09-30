@@ -30,7 +30,7 @@ public class Program {
             case "^":
                 return Math.pow(a , b);
             default:
-                throw new IllegalArgumentException("Unsuport Operate");
+                throw new IllegalArgumentException("Unsupported operator");
         }
     }
 }
