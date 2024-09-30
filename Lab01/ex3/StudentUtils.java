@@ -89,6 +89,6 @@ public class StudentUtils {
      */
     public static List<String> goodStudentName(List<Student> list)
     {
-        return list.stream().filter(x -> x.average() >= 8).map(x -> x.name).collect(Collectors.toList());   
+        return list.stream().filter(Student::isGoodStudent).map(x -> x.name).collect(Collectors.toList());   
     } 
 }
