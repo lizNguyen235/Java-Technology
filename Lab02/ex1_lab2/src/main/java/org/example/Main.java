@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        if(args.length == 0){
+        int numArgsNecessary = 3; // URI, username, password
+        if(args.length != numArgsNecessary){
             System.out.println("Please provide right an argument");
             return;
         }
