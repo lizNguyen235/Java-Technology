@@ -5,32 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO implements Repository<Product,Integer> {
-    String hostName;
-    String dbName;
+    String URI;
     String userName;
     String password;
 
 
-    public ProductDAO(String hostName, String dbName, String userName, String password) {
-        this.hostName = hostName;
-        this.dbName = dbName;
+    public ProductDAO(String URI, String userName, String password) {
+        this.URI = URI;
         this.userName = userName;
         this.password = password;
 
     }
-    public static Connection getPostgresSQLConnection() {
-        String hostName = "localhost";
-        String dbName = "ProductManagement";
-        String userName = "postgres";
-        String password = "hung123";
-        return getPostgresSQLConnection(hostName, dbName, userName, password);
+    public Connection getPostgresSQLConnection() {
+        return getPostgresSQLConnection(URI, userName, password);
     }
 
-    public static Connection getPostgresSQLConnection(String hostName, String dbName, String userName, String
+    public static Connection getPostgresSQLConnection(String URl, String userName, String
             password) {
         try {
-            String connectionURL = "jdbc:postgresql://" + hostName + ":5432/" + dbName;
-            return DriverManager.getConnection(connectionURL, userName, password);
+            return DriverManager.getConnection(URl, userName, password);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -134,4 +127,17 @@ public class ProductDAO implements Repository<Product,Integer> {
             return false;
         }
     }
+    public boolean deleteAll() {
+        try {
+            String query = "DELETE FROM product";
+            Connection connection = getPostgresSQLConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+            return statement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
