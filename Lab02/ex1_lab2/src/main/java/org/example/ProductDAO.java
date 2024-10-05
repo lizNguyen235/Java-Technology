@@ -127,13 +127,12 @@ public class ProductDAO implements Repository<Product,Integer> {
             return false;
         }
     }
-    public boolean deleteAll() {
+    public boolean createTable() {
         try {
-            String query = "DELETE FROM product";
+            String query = "Create table if not exists product(id SERIAL  primary key, name varchar(50), price double precision)";
             Connection connection = getPostgresSQLConnection();
             PreparedStatement statement = connection.prepareStatement(query);
-            return statement.executeUpdate() > 0;
-
+            return statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

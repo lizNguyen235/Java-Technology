@@ -1,6 +1,8 @@
 package org.example;
 
 import jakarta.persistence.*;
+import jakarta.validation.*;
+import java.util.List;
 
 @Entity
 @Table(name = "manufacture")
@@ -9,12 +11,16 @@ public class Manufacture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private String ID;
-    @Column(name = "name", nullable = false,)
+    @Column(name = "name", nullable = false)
+    @Size(min = 3, max = 50)
     private String name;
     @Column(name = "location", nullable = false)
     private String location;
     @Column(name = "employee_count")
     private int employeeCount;
+
+    private List<Phone> phones;
+
     public Manufacture(String ID, String name, String location, int employeeCount) {
         this.ID = ID;
         this.name = name;

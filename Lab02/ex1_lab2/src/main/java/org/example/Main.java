@@ -11,7 +11,7 @@ public class Main {
             return;
         }
         ProductDAO productDAO = new ProductDAO(args[0], args[1], args[2]);
-        productDAO.deleteAll();
+        productDAO.createTable();
         do {
             System.out.println("1. Add product");
             System.out.println("2. Display all products");
