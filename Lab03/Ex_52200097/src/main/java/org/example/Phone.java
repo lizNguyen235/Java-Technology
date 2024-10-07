@@ -1,14 +1,15 @@
 package org.example;
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.*;
 @Entity
-@Table(name = "phone")
+@Table(name = "MobilePhone")
 public class Phone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private   String ID;
+    private int ID;
     @Column(name = "name", nullable = false)
+    @Size(min = 3, max = 128)
     private String name;
     @Column(name = "price", nullable = false)
     private int Price;
@@ -18,19 +19,21 @@ public class Phone {
     private String country;
     @Column(name = "quantity")
     private int quantity;
+    @ManyToOne
+    private Manufacture manufacture;
 
-    public Phone(String ID, String name, int Price, String color, String country, int quantity) {
-        this.ID = ID;
+    public Phone() {}
+    public Phone( String name, int Price, String color, String country, int quantity) {
         this.name = name;
         this.Price = Price;
         this.color = color;
         this.country = country;
         this.quantity = quantity;
     }
-    public String getID() {
+    public int getID() {
         return ID;
     }
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
     public String getName() {
@@ -62,5 +65,24 @@ public class Phone {
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+    public Manufacture getManufacture() {
+        return manufacture;
+    }
+
+    public void setManufacture(Manufacture manufacture) {
+        this.manufacture = manufacture;
+    }
+
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
+                ", Price=" + Price +
+                ", color='" + color + '\'' +
+                ", country='" + country + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }

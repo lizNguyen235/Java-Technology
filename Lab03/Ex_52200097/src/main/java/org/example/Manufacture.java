@@ -1,36 +1,39 @@
 package org.example;
 
 import jakarta.persistence.*;
-import jakarta.validation.*;
+import jakarta.validation.constraints.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "manufacture")
+@Table(name = "Manufacture")
 public class Manufacture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private String ID;
+    private Integer ID;
     @Column(name = "name", nullable = false)
-    @Size(min = 3, max = 50)
+    @Size(min = 3, max = 128)
     private String name;
     @Column(name = "location", nullable = false)
     private String location;
     @Column(name = "employee_count")
     private int employeeCount;
+    @OneToMany(mappedBy = "manufacture")
+    private List<Phone> phones = new ArrayList<Phone>();
 
-    private List<Phone> phones;
+    public Manufacture() {}
 
-    public Manufacture(String ID, String name, String location, int employeeCount) {
+    public Manufacture(Integer ID, String name, String location, int employeeCount) {
         this.ID = ID;
         this.name = name;
         this.location = location;
         this.employeeCount = employeeCount;
     }
-    public String getID() {
+    public int getID() {
         return ID;
     }
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
     public String getName() {
@@ -42,6 +45,15 @@ public class Manufacture {
     public String getLocation() {
         return location;
     }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+
     public void setLocation(String location) {
         this.location = location;
     }
@@ -51,5 +63,13 @@ public class Manufacture {
     public void setEmployeeCount(int employeeCount) {
         this.employeeCount = employeeCount;
     }
-
+    @Override
+    public String toString() {
+        return "Manufacture{" +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", employeeCount=" + employeeCount +
+                '}';
+    }
 }
