@@ -14,7 +14,6 @@ public class Main {
         Session session;
         int choice;
         do {
-
             System.out.println("Menu:");
             System.out.println("1. Add Phone");
             System.out.println("2. Get Phone by ID");
@@ -73,6 +72,7 @@ public class Main {
                     // Update Phone
                     System.out.print("Enter Phone ID: ");
                     int phoneID1 = scanner.nextInt();
+                    scanner.nextLine();
                     Phone phone2 = phoneDAO.get(phoneID1);
                     System.out.print("Enter Phone Name: ");
                     String name1 = scanner.nextLine();
@@ -133,7 +133,7 @@ public class Main {
                     String location = scanner.nextLine();
                     System.out.print("Enter Manufacture Employee Count: ");
                     int employeeCount = scanner.nextInt();
-                    Manufacture manufacture2 = new Manufacture(name3, location, employeeCount);
+                    Manufacture manufacture2 = new Manufacture();
                     System.out.print("Enter Phones ID: ");
                     while (scanner.hasNextInt()) {
 
@@ -144,6 +144,10 @@ public class Main {
                         Phone phone6 = phoneDAO.get(phoneID4);
                         manufacture2.getPhones().add(phone6);
                     }
+                    manufacture2.setName(name3);
+                    manufacture2.setLocation(location);
+                    manufacture2.setEmployeeCount(employeeCount);
+                    System.out.println(manufacture2);
                     manufactureDAO.add(manufacture2);
                     break;
                 case 12:
@@ -213,7 +217,7 @@ public class Main {
                     catch (InvalidOperationException e) {
                         System.out.println(e.getMessage());
                     }
-
+                    break;
                 case 0:
                     System.out.println("Exiting...");
                     break;
