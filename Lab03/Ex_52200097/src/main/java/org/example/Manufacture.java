@@ -19,7 +19,7 @@ public class Manufacture {
     private String location;
     @Column(name = "employee_count")
     private int employeeCount;
-    @OneToMany(mappedBy = "manufacture")
+    @OneToMany(mappedBy = "manufacture", cascade = CascadeType.ALL)
     private List<Phone> phones = new ArrayList<Phone>();
 
     public Manufacture() {}

@@ -15,10 +15,6 @@ public class ManufactureDAO implements Repository<Manufacture> {
     public boolean add(Manufacture manufacture) {
         try {
             session.beginTransaction();
-            for(Phone phone: manufacture.getPhones()) {
-                phone.setManufacture(manufacture);
-                session.merge(phone);
-            }
             session.persist(manufacture);
             session.getTransaction().commit();
             return true;

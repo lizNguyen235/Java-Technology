@@ -135,20 +135,13 @@ public class Main {
                     int employeeCount = scanner.nextInt();
                     Manufacture manufacture2 = new Manufacture();
                     System.out.print("Enter Phones ID: ");
-                    while (scanner.hasNextInt()) {
-
-                        int phoneID4 = scanner.nextInt();
-                        if(phoneID4 == -1) {
-                            break;
-                        }
-                        Phone phone6 = phoneDAO.get(phoneID4);
-                        manufacture2.getPhones().add(phone6);
-                    }
+                    Phone bbb = new Phone("bbb", 100, "red", "USA", 100);
+                    manufacture2.getPhones().add(bbb);
                     manufacture2.setName(name3);
                     manufacture2.setLocation(location);
                     manufacture2.setEmployeeCount(employeeCount);
-                    System.out.println(manufacture2);
                     manufactureDAO.add(manufacture2);
+                    phoneDAO.add(bbb);
                     break;
                 case 12:
                     // Get Manufacture by ID
