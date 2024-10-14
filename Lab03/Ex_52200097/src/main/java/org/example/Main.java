@@ -168,12 +168,6 @@ public class Main {
                     manufacture4.setName(name4);
                     manufacture4.setLocation(location1);
                     manufacture4.setEmployeeCount(employeeCount1);
-                    System.out.print("Enter Phones ID: ");
-                    while (scanner.hasNextInt()) {
-                        int phoneID4 = scanner.nextInt();
-                        Phone phone6 = phoneDAO.get(phoneID4);
-                        manufacture4.getPhones().add(phone6);
-                    }
                     manufactureDAO.update(manufacture4);
                     break;
                 case 15:
