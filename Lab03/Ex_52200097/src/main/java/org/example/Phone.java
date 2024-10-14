@@ -12,7 +12,7 @@ public class Phone {
     @Size(min = 3, max = 128)
     private String name;
     @Column(name = "price", nullable = false)
-    private int Price;
+    private int price;
     @Column(name = "color", nullable = false)
     private String color;
     @Column(name = "country")
@@ -25,7 +25,7 @@ public class Phone {
     public Phone() {}
     public Phone( String name, int Price, String color, String country, int quantity) {
         this.name = name;
-        this.Price = Price;
+        this.price = Price;
         this.color = color;
         this.country = country;
         this.quantity = quantity;
@@ -43,10 +43,10 @@ public class Phone {
         this.name = name;
     }
     public int getPrice() {
-        return Price;
+        return price;
     }
     public void setPrice(int Price) {
-        this.Price = Price;
+        this.price = Price;
     }
     public String getColor() {
         return color;
@@ -76,10 +76,21 @@ public class Phone {
 
     @Override
     public String toString() {
+        if(manufacture != null) {
+            return "Phone{" +
+                    "ID=" + ID +
+                    ", name='" + name + '\'' +
+                    ", Price=" + price +
+                    ", color='" + color + '\'' +
+                    ", country='" + country + '\'' +
+                    ", quantity=" + quantity +
+                    ", manufacture=" + manufacture.getName() +
+                    '}';
+        }
         return "Phone{" +
                 "ID=" + ID +
                 ", name='" + name + '\'' +
-                ", Price=" + Price +
+                ", Price=" + price +
                 ", color='" + color + '\'' +
                 ", country='" + country + '\'' +
                 ", quantity=" + quantity +

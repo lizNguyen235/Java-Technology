@@ -15,9 +15,12 @@ public class ManufactureDAO implements Repository<Manufacture> {
     public boolean add(Manufacture manufacture) {
         try {
             session.beginTransaction();
+            for(Phone phone: manufacture.getPhones()) {
+                phone.setManufacture(manufacture);
+                session.merge(phone);
+            }
             session.persist(manufacture);
             session.getTransaction().commit();
-            session.close();
             return true;
         } catch (Exception e) {
             return false;
@@ -27,11 +30,7 @@ public class ManufactureDAO implements Repository<Manufacture> {
     @Override
     public Manufacture get(int k) {
         try {
-            session.beginTransaction();
             Manufacture manufacture = session.get(Manufacture.class, k);
-            session.getTransaction().commit();
-            session.close();
-
             return manufacture;
         } catch (Exception e) {
             return null;
@@ -41,10 +40,7 @@ public class ManufactureDAO implements Repository<Manufacture> {
     @Override
     public List<Manufacture> getAll() {
         try {
-            session.beginTransaction();
             List<Manufacture> manufactures = session.createQuery("FROM Manufacture", Manufacture.class).getResultList();
-            session.getTransaction().commit();
-            session.close();
             return manufactures;
         } catch (Exception e) {
             return null;
@@ -57,7 +53,6 @@ public class ManufactureDAO implements Repository<Manufacture> {
             session.beginTransaction();
             session.merge(manufacture);
             session.getTransaction().commit();
-            session.close();
             return true;
         } catch (Exception e) {
             return false;
@@ -70,7 +65,6 @@ public class ManufactureDAO implements Repository<Manufacture> {
             session.beginTransaction();
             session.remove(k);
             session.getTransaction().commit();
-            session.close();
             return true;
         } catch (Exception e) {
             return false;
@@ -80,8 +74,10 @@ public class ManufactureDAO implements Repository<Manufacture> {
     @Override
     public boolean remove(int t) {
         try {
+            session.beginTransaction();
             Manufacture manufacture = session.get(Manufacture.class, t);
             session.remove(manufacture);
+            session.getTransaction().commit();
             return true;
         } catch (Exception e) {
             return false;
@@ -99,14 +95,16 @@ public class ManufactureDAO implements Repository<Manufacture> {
         return session.createQuery("SELECT SUM(m.employeeCount) FROM Manufacture m",  Long.class).getSingleResult();
     }
 
-    public Manufacture getManufactureLast() {
-        String hql = "FROM Manufacturer m WHERE m.country = :country ORDER BY m.id DESC";
+    public Manufacture getManufactureLast() throws InvalidOperationException {
+        String hql = "FROM Manufacture m WHERE m.location = :location ORDER BY m.id DESC";
         Query query = session.createQuery(hql, Manufacture.class);
-        query.setParameter("country", "US");
+        query.setParameter("location", "US");
         query.setMaxResults(1);
         if(query.getResultList().isEmpty()) {
-            throw new IllegalArgumentException("No result");
+            throw new InvalidOperationException("No result");
         }
         return (Manufacture) query.getSingleResult();
     }
 }
+
+

@@ -24,8 +24,7 @@ public class Manufacture {
 
     public Manufacture() {}
 
-    public Manufacture(Integer ID, String name, String location, int employeeCount) {
-        this.ID = ID;
+    public Manufacture( String name, String location, int employeeCount) {
         this.name = name;
         this.location = location;
         this.employeeCount = employeeCount;
@@ -70,6 +69,7 @@ public class Manufacture {
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", employeeCount=" + employeeCount +
+                ", phones=" + phones.toString() +
                 '}';
     }
 }

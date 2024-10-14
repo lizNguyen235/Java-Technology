@@ -8,12 +8,19 @@ import org.hibernate.SessionFactory;
 import java.util.List;
 
 public class PhoneDAO implements Repository<Phone> {
-    private final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
-    private Session session = sessionFactory.openSession();
+    private static final SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+
+    public static Session getSession() {
+        return session;
+    }
+
+    private static final Session session = sessionFactory.openSession();
     @Override
     public boolean add(Phone phone) {
         try {
+            session.beginTransaction();
             session.persist(phone);
+            session.getTransaction().commit();
             return true;
         } catch (Exception e) {
             return false;
@@ -44,7 +51,9 @@ public class PhoneDAO implements Repository<Phone> {
     @Override
     public boolean update(Phone phone) {
         try {
+            session.beginTransaction();
             session.merge(phone);
+            session.getTransaction().commit();
             return true;
         } catch (Exception e) {
             return false;
@@ -54,7 +63,9 @@ public class PhoneDAO implements Repository<Phone> {
     @Override
     public boolean remove(Phone k) {
         try {
+            session.beginTransaction();
             session.remove(k);
+            session.getTransaction().commit();
             return true;
         } catch (Exception e) {
             return false;
@@ -64,36 +75,31 @@ public class PhoneDAO implements Repository<Phone> {
     @Override
     public boolean remove(int t) {
         try {
+            session.beginTransaction();
             Phone phone = session.get(Phone.class, t);
             session.remove(phone);
+            session.getTransaction().commit();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
 
     public int getHighestPrice() {
-        Query query = session.createQuery("SELECT MAX(Price) FROM Phone",  Long.class);
+        Query query = session.createQuery("SELECT MAX(price) FROM Phone",  Integer.class);
         return (int) query.getSingleResult();
     }
-    public List<Phone> getPhonesWithPrice(int price) {
-        Query query = session.createQuery("FROM Phone p ORDER BY p.name, p.price DESC", Phone.class);
+    public List getPhonesWithPrice() {
+        Query query = session.createQuery("FROM Phone p ORDER BY p.country, p.price DESC", Phone.class);
         return query.getResultList();
     }
-    public boolean checkAboutPhonePrice(String name) {
-        Query query = session.createQuery("FROM Phone p WHERE p.price = :price", Phone.class);
+    public boolean checkAboutPhonePrice() {
+        Query query = session.createQuery("FROM Phone p WHERE p.price > :price", Phone.class);
         query.setParameter("price", 50000000);
-        return query.getResultList().size() > 0;
+        return !query.getResultList().isEmpty();
     }
-    public Phone getPhone() {
+    public Phone getPhoneCriteria() {
        Query query = session.createQuery("FROM Phone p WHERE p.price > :price and p.color = :color ", Phone.class);
        query.setParameter("price", 15000000);
        query.setParameter("color", "Pink");
