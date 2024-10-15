@@ -11,13 +11,13 @@ import java.io.*;
 public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String page = request.getParameter("page");
+        String typePage = request.getParameter("page");
 
         PrintWriter writer = response.getWriter();
-        if (page == null) {
+        if (typePage == null) {
             writer.write("<html><body><h1>Welcome to our website</h1></body></html>");
         } else {
-            switch (page) {
+            switch (typePage) {
                 case "about":
                     RequestDispatcher rd1 = request.getRequestDispatcher("about.jsp");
                     rd1.forward(request, response);

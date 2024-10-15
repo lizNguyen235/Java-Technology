@@ -15,6 +15,9 @@ public class RegisterServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
+
+
+        //get data from form
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String birthday = request.getParameter("birthday");
@@ -25,6 +28,10 @@ public class RegisterServlet extends HttpServlet {
         String toeic = request.getParameter("toeic");
         String introduction = request.getParameter("introduction");
 
+
+
+
+        //set data to request
         request.setAttribute("name", name);
         request.setAttribute("email", email);
         request.setAttribute("birthday", birthday);
@@ -34,7 +41,6 @@ public class RegisterServlet extends HttpServlet {
         request.setAttribute("ide", ide);
         request.setAttribute("toeic", toeic);
         request.setAttribute("introduction", introduction);
-
         request.getRequestDispatcher("result.jsp").forward(request, response);
     }
 }

@@ -18,10 +18,17 @@ public class UploadServlet extends HttpServlet {
             throws IOException, ServletException {
         response.setContentType("text/html");
 
-        String newFileName = request.getParameter("name");
-        Part filePart = request.getPart("document");
-        String uploadedFileName = filePart.getSubmittedFileName();
-        boolean override = "on".equals(request.getParameter("override"));
+
+
+
+
+        String createFileName = request.getParameter("name");
+        Part PartFile = request.getPart("document");
+        String uploadedFileName = PartFile.getSubmittedFileName();
+        boolean isOverride = "on".equals(request.getParameter("override"));
+
+
+
 
         PrintWriter writer = response.getWriter();
 
@@ -32,29 +39,38 @@ public class UploadServlet extends HttpServlet {
             uploadDir.mkdir();
         }
 
-        //Kiem tra duoi tap tin
-        String[] x = uploadedFileName.split("\\.");
-        if(!extensions.contains(x[x.length-1])) {
+
+
+
+
+
+        String[] tmp = uploadedFileName.split("\\.");
+        if(!extensions.contains(tmp[tmp.length-1])) {
             writer.write("<html><body><h4>Unsupported file extension<h4></body></html>");
             return;
         }
+
+
+
+
+
         //Lay file tu request
         for (Part part : request.getParts()) {
             if (part.getContentType() != null) {
                 String oldFileName = part.getSubmittedFileName();
 
                 if (oldFileName != null && !oldFileName.isEmpty()) {
-                    File file = new File(uploadDir, newFileName + "." + x[x.length-1]);
+                    File file = new File(uploadDir, createFileName + "." + tmp[tmp.length-1]);
 
-                    if (!override && file.exists()) {
-                        writer.write("<html><body><h4>File already exists.</h4></body></html>");
+                    if (!isOverride && file.exists()) {
+                        writer.write("<html><body><h4>File already exists</h4></body></html>");
                         return;
                     } else {
                         part.write(file.getAbsolutePath());
-                        writer.write("<html><body><h4>File uploaded successfully.</h4></body></html>");
+                        writer.write("<html><body><h3>Tải file lên thành công</h3></body></html>");
                     }
                 } else {
-                    writer.write("<html><body><h4>No file selected.</h4></body></html>");
+                    writer.write("<html><body><h3>Không file nào được chọn</h3></body></html>");
                 }
             }
         }

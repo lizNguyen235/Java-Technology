@@ -9,7 +9,7 @@ public class ImageServlet1 extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("image/png");
-        try (InputStream image = getClass().getResourceAsStream("/afternoon.png")) {
+        try (InputStream image = getClass().getResourceAsStream("/VietNam.jpeg")) {
             if (image != null) {
                 byte[] buffer = new byte[1024];
                 int bytesRead;
