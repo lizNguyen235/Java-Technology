@@ -32,10 +32,13 @@
                 </div>
             </form>
 
-            <% String message = (String) request.getAttribute("message");
-                if (message != null) { %>
-                    <d><%= message %></d>
-            <% } %>
+             <%
+                String notify = (String) request.getAttribute("notify");
+                String color = (String) request.getAttribute("color");
+                if (notify != null && color != null) { %>
+                <div style="color: <%= color %>"><%= notify %></div>
+             <% } %>
+
 
         </div>
     </div>

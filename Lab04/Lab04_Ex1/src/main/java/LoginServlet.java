@@ -8,11 +8,13 @@ import java.util.*;
 public class LoginServlet extends HttpServlet {
     private final HashMap<String, String> accounts = new HashMap<>();
 
-    public LoginServlet() {}
+    public LoginServlet() {
+        accounts.put("admin", "admin");
+        accounts.put("user", "user");
+    }
 
     public void init() {
-        accounts.put("user", "123");
-        accounts.put("mio", "0701");
+        System.out.println("LoginServlet is initialized");
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -24,10 +26,12 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         
         if (accounts.containsKey(username) && accounts.get(username).equals(password)) {
-            req.setAttribute("message", "Username and Password are correct");
+            req.setAttribute("notify", "Đăng nhập thành công");
+            req.setAttribute("color", "green");
             req.getRequestDispatcher("index.jsp").forward(req, res);
         } else {
-            req.setAttribute("message", "Username or Password is incorrect");
+            req.setAttribute("notify", "Tài khoản hoặc mật khẩu không chính xác");
+            req.setAttribute("color", "red");
             req.getRequestDispatcher("index.jsp").forward(req, res);
         }
     }

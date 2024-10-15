@@ -11,7 +11,7 @@ public class DownloadServlet extends HttpServlet {
         String fileName = request.getParameter("file");
 
         if (fileName == null || fileName.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "File not found!");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Không tìm thầy file");
             return;
         }
 
