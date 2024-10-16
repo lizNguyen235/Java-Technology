@@ -14,7 +14,6 @@
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
             <h3 class="text-center text-secondary mt-5 mb-3">User Login</h3>
-
             <form class="border rounded w-100 mb-5 mx-auto px-3 pt-3 bg-light" action="LoginServlet" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
