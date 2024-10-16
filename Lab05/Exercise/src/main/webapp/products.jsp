@@ -1,6 +1,10 @@
 <%@ page import="model.Product" %>
 <%@ page import="dao.ProductDAO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="jakarta.servlet.http.HttpServletRequest" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -120,6 +124,35 @@
                     <%
                         }
                     %>
+<!-- Đặt danh sách sản phẩm vào một biến JSTL -->
+<%--&lt;%&ndash;                            &lt;%&ndash;%>--%>
+<%--&lt;%&ndash;                                ProductDAO productDAO = new ProductDAO();&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                List<Product> productList = productDAO.findAll();&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                request.setAttribute("productList", productList);&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                System.out.println(productList);&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            %>&ndash;%&gt;--%>
+
+<%--&lt;%&ndash;                            <!-- Kiểm tra nếu danh sách sản phẩm không rỗng -->&ndash;%&gt;--%>
+<%--                            <c:if test="${not empty products}">--%>
+<%--                                <!-- Lặp qua danh sách sản phẩm -->--%>
+<%--                                <c:forEach var="product" items="${products}">--%>
+<%--                                    <tr>--%>
+<%--                                        <td><c:out value="${product.id}"/></td>--%>
+<%--                                        <td><c:out value="${product.name}"/></td>--%>
+<%--                                        <td><c:out value="${product.price}"/></td>--%>
+<%--                                        <td>--%>
+<%--                                            <a href="delete?id=${product.id}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm ${product.name} không?');">Xóa</a>--%>
+<%--                                        </td>--%>
+<%--                                    </tr>--%>
+<%--                                </c:forEach>--%>
+<%--                            </c:if>--%>
+
+<%--                            <!-- Trường hợp không có sản phẩm nào -->--%>
+<%--                            <c:if test="${empty products}">--%>
+<%--                                <tr>--%>
+<%--                                    <td colspan="4">Không có sản phẩm nào.</td>--%>
+<%--                                </tr>--%>
+<%--                            </c:if>--%>
                 </tbody>
             </table>
         </div>
