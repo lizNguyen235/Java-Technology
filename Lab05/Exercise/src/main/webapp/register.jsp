@@ -24,7 +24,7 @@
     boolean isLogin = session.getAttribute("userID") != null;
     if(isLogin) {
         response.setContentType("text/html");
-        response.sendRedirect("/products.jsp");
+        response.sendRedirect("/add");
     }
 %>
 <body class="bg-secondary">

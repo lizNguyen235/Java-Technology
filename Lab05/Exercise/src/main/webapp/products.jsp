@@ -100,32 +100,31 @@
 <%--                        <a href="#">Xóa</a>--%>
 <%--                    </td>--%>
 <%--                </tr>--%>
-                    <%
-                        ProductDAO productDAO = new ProductDAO();
-                        List<Product> productList = productDAO.findAll();
-                        if (productList != null) {
-                            for (Product product : productList) {
-                    %>
-                    <tr>
-                        <td><%= product.getId() %></td>
-                        <td><a href="#"><%= product.getName() %></a></td>
-                        <td>$<%= product.getPrice() %></td>
-                        <td>
-                            <a href="delete?id=<%= product.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">Xóa</a>
-                        </td>
-                    </tr>
-                    <%
-                        }
-                    } else {
-                    %>
-                    <tr>
-                        <td colspan="4">Không có sản phẩm nào.</td>
-                    </tr>
-                    <%
-                        }
-                    %>
+<%--                    <%--%>
+<%--                        ProductDAO productDAO = new ProductDAO();--%>
+<%--                        List<Product> productList = productDAO.findAll();--%>
+<%--                        if (productList != null) {--%>
+<%--                            for (Product product : productList) {--%>
+<%--                    %>--%>
+<%--                    <tr>--%>
+<%--                        <td><%= product.getId() %></td>--%>
+<%--                        <td><a href="#"><%= product.getName() %></a></td>--%>
+<%--                        <td>$<%= product.getPrice() %></td>--%>
+<%--                        <td>--%>
+<%--                            <a href="delete?id=<%= product.getId() %>" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">Xóa</a>--%>
+<%--                        </td>--%>
+<%--                    </tr>--%>
+<%--                    <%--%>
+<%--                        }--%>
+<%--                    } else {--%>
+<%--                    %>--%>
+<%--                    <tr>--%>
+<%--                        <td colspan="4">Không có sản phẩm nào.</td>--%>
+<%--                    </tr>--%>
+<%--                    <%--%>
+<%--                        }--%>
+<%--                    %>--%>
 <!-- Đặt danh sách sản phẩm vào một biến JSTL -->
-<%--&lt;%&ndash;                            &lt;%&ndash;%>--%>
 <%--&lt;%&ndash;                                ProductDAO productDAO = new ProductDAO();&ndash;%&gt;--%>
 <%--&lt;%&ndash;                                List<Product> productList = productDAO.findAll();&ndash;%&gt;--%>
 <%--&lt;%&ndash;                                request.setAttribute("productList", productList);&ndash;%&gt;--%>
@@ -133,26 +132,26 @@
 <%--&lt;%&ndash;                            %>&ndash;%&gt;--%>
 
 <%--&lt;%&ndash;                            <!-- Kiểm tra nếu danh sách sản phẩm không rỗng -->&ndash;%&gt;--%>
-<%--                            <c:if test="${not empty products}">--%>
-<%--                                <!-- Lặp qua danh sách sản phẩm -->--%>
-<%--                                <c:forEach var="product" items="${products}">--%>
-<%--                                    <tr>--%>
-<%--                                        <td><c:out value="${product.id}"/></td>--%>
-<%--                                        <td><c:out value="${product.name}"/></td>--%>
-<%--                                        <td><c:out value="${product.price}"/></td>--%>
-<%--                                        <td>--%>
-<%--                                            <a href="delete?id=${product.id}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm ${product.name} không?');">Xóa</a>--%>
-<%--                                        </td>--%>
-<%--                                    </tr>--%>
-<%--                                </c:forEach>--%>
-<%--                            </c:if>--%>
+                            <c:if test="${not empty products}">
+                                <!-- Lặp qua danh sách sản phẩm -->
+                                <c:forEach var="product" items="${products}">
+                                    <tr>
+                                        <td><c:out value="${product.id}"/></td>
+                                        <td><c:out value="${product.name}"/></td>
+                                        <td><c:out value="${product.price}"/></td>
+                                        <td>
+                                            <a href="delete?id=${product.id}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm ${product.name} không?');">Xóa</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
 
-<%--                            <!-- Trường hợp không có sản phẩm nào -->--%>
-<%--                            <c:if test="${empty products}">--%>
-<%--                                <tr>--%>
-<%--                                    <td colspan="4">Không có sản phẩm nào.</td>--%>
-<%--                                </tr>--%>
-<%--                            </c:if>--%>
+                            <!-- Trường hợp không có sản phẩm nào -->
+                            <c:if test="${empty products}">
+                                <tr>
+                                    <td colspan="4">Không có sản phẩm nào.</td>
+                                </tr>
+                            </c:if>
                 </tbody>
             </table>
         </div>

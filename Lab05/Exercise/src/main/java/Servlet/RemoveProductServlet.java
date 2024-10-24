@@ -22,7 +22,7 @@ public class RemoveProductServlet extends HttpServlet {
 
         try {
             productDAO.delete(id);
-            resp.sendRedirect("/products.jsp");
+            resp.sendRedirect("/add");
         } catch (Exception e) {
             e.printStackTrace();
         }

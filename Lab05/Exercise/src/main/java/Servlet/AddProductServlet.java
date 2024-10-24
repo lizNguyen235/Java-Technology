@@ -26,7 +26,7 @@ public class AddProductServlet extends HttpServlet {
         try {
             Product product = new Product(name, price);
             productDAO.save(product);
-            resp.sendRedirect("/products.jsp");
+            resp.sendRedirect("/add");
         } catch (Exception e) {
             e.printStackTrace();
         }

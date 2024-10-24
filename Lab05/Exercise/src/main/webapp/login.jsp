@@ -13,7 +13,7 @@
     boolean isLogin = session.getAttribute("userID") != null;
     if(isLogin) {
         response.setContentType("text/html");
-        response.sendRedirect("/products.jsp");
+        response.sendRedirect("/add");
     }
 %>
 <div class="container">
@@ -28,6 +28,12 @@
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                    <label class="form-check-label" for="remember">
+                        Remember username & password
+                    </label>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success px-5">Login</button>
