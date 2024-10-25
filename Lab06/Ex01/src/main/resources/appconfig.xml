@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="beanOne" class="org.example.Product" scope="prototype">
+        <property name ="id" value ="1"/>
+        <property name="name" value ="abc"/>
+        <property name="price" value ="100"/>
+        <property name="description" value ="xyz"/>
+    </bean>
+
+    <bean id="beanTwo" class="org.example.Product" scope="prototype">
+        <constructor-arg type="int" value ="1"/>
+        <constructor-arg name="name" value ="abc"/>
+        <constructor-arg name="price" value ="100"/>
+        <constructor-arg name="description" value ="xyz"/>
+    </bean>
+
+    <bean id="beanThree" class="org.example.Product">
+        <constructor-arg type="int" value ="3"/>
+        <constructor-arg name="name" value ="abc"/>
+        <constructor-arg name="price" value ="100"/>
+        <constructor-arg name="description" value ="xyz"/>
+    </bean>
+</beans>
