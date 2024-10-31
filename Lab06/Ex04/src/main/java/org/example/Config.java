@@ -9,17 +9,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages="Domain")
-        public class Config {
-
-    @Bean
-    public PlainTextWriter plainTextWriter() {
-
-        return new PlainTextWriter();
-    }
-
-    @Bean
-    public PdfTextWriter pdfTextWriter() {
-        return new PdfTextWriter();
-    }
-
+public class Config {
 }

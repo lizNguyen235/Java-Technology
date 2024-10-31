@@ -1,11 +1,14 @@
 package Domain;
 
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class PlainTextWriter implements TextWriter {
+
+public class PdfTextWriter implements TextWriter {
     @Override
     public void write(String fileName, String text) {
         try {
