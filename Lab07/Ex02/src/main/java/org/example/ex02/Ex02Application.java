@@ -30,7 +30,7 @@ public class Ex02Application implements CommandLineRunner {
 		studentRepository.save(student1);
 		studentRepository.save(student2);
 		studentRepository.save(student3);
-		List<Students> students = studentRepository.findAll();
+		Iterable<Students> students = studentRepository.findAll();
 		students.forEach(System.out::println);
 		studentRepository.delete(student1);
 		students = studentRepository.findAll();
