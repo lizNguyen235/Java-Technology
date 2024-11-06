@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
+
 @Configuration
 @EnableWebSecurity
 public class MySecurityConfig {
@@ -38,7 +39,7 @@ public class MySecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login") // chỉ định trang đăng nhập tùy chỉnh
-                        .loginProcessingUrl("/perform_login")
+                        .loginProcessingUrl("/perform_login") // chỉ định endpoint entry để tíến hành xử lí
                         .permitAll() // cho phép mọi người truy cập vào trang đăng nhập
                         .successHandler(new SimpleUrlAuthenticationSuccessHandler("/home")) // sau khi đăng nhập thành công, chuyển hướng đến trang /login/home
                 )
@@ -47,6 +48,7 @@ public class MySecurityConfig {
     }
 
     @Bean
+    // cái hàm này dùng để tiến hành xác thực người dùng
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
