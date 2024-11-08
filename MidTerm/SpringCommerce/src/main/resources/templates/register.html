@@ -17,27 +17,30 @@
 		<div class="wrapper">
 			<div class="inner">
 				<img src="/Register/images/image-1.png" alt="" class="image-1">
-				<form action="">
+				<form action="/register_account" method="post">
 					<h3>New Account?</h3>
 					<div class="form-holder">
 						<span class="lnr lnr-user"></span>
-						<input type="text" class="form-control" placeholder="Username">
+						<input type="text" class="form-control" placeholder="Username" name="username" required>
 					</div>
 					<div class="form-holder">
 						<span class="lnr lnr-phone-handset"></span>
-						<input type="text" class="form-control" placeholder="Phone Number">
+						<input type="number" class="form-control" placeholder="Phone Number" name="phone"  required>
 					</div>
 					<div class="form-holder">
 						<span class="lnr lnr-envelope"></span>
-						<input type="text" class="form-control" placeholder="Mail">
+						<input type="email" class="form-control" placeholder="Email" name="email" required>
 					</div>
 					<div class="form-holder">
 						<span class="lnr lnr-lock"></span>
-						<input type="password" class="form-control" placeholder="Password">
+						<input type="password" class="form-control" placeholder="Password" name="password" required>
 					</div>
 					<div class="form-holder">
-						<span class="lnr lnr-lock"></span>
-						<input type="password" class="form-control" placeholder="Confirm Password">
+						<span class="lnr lnr-map-marker"></span>
+						<input type="text" class="form-control" placeholder="Address" name ="address" required>
+					</div>
+					<div th:if="${isRegisterMessage}" class="text-danger">
+						<p th:text="${isRegisterMessage}"></p>
 					</div>
 					<button>
 						<span>Register</span>
@@ -45,10 +48,8 @@
 				</form>
 				<img src="/Register/images/image-2.png" alt="" class="image-2">
 			</div>
-			
 		</div>
-		
 		<script src="/Register/js/jquery-3.3.1.min.js"></script>
 		<script src="/Register/js/main.js"></script>
-	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+	</body>
 </html>

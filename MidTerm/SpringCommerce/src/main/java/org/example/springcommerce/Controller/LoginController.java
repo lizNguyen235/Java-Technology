@@ -3,12 +3,16 @@ package org.example.springcommerce.Controller;
 
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -16,7 +20,6 @@ public class LoginController {
     @GetMapping("/login")
     public String login() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication);
         if (authentication == null || authentication.getName().equals("anonymousUser")) {
             return "index";
         }
@@ -24,7 +27,14 @@ public class LoginController {
     }
 
     @GetMapping("/home")
-    public String accessHomePage() {
+    public String accessHomePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        authentication.getAuthorities().forEach(authority -> {
+            model.addAttribute("role", authority.getAuthority());
+            System.out.println(authority.getAuthority());
+        });
+
+        model.addAttribute("username", authentication.getName());
         return "homepage";
     }
 

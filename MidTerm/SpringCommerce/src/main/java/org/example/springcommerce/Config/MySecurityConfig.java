@@ -34,7 +34,8 @@ public class MySecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // tắt tính năng bảo vệ CSRF
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("Register/**", "Login/**","/register").permitAll() // cho phép truy cập vào CSS, JS, hình ảnh
+                        .requestMatchers("Register/**", "Login/**","/register", "/register_account").permitAll() // cho phép truy cập vào CSS, JS, hình ảnh
+                        .requestMatchers(("/product")).hasRole("ADMIN") // chỉ cho phép người dùng có quyền ADMIN truy cập vào trang /product
                         .anyRequest().authenticated() // yêu cầu tất cả các yêu cầu đều cần xác thực
                 )
                 .formLogin(form -> form
@@ -52,12 +53,12 @@ public class MySecurityConfig {
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
 }
