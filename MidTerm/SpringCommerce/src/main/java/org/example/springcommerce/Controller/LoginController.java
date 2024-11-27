@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 public class LoginController {
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public String login() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication.getName().equals("anonymousUser")) {
@@ -31,7 +31,6 @@ public class LoginController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         authentication.getAuthorities().forEach(authority -> {
             model.addAttribute("role", authority.getAuthority());
-            System.out.println(authority.getAuthority());
         });
 
         model.addAttribute("username", authentication.getName());

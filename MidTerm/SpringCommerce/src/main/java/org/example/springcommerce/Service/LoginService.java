@@ -21,11 +21,8 @@ public class LoginService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountRepo.findByUsername(username);
         if (account == null) {
-            System.out.println("User not found");
             throw new UsernameNotFoundException("User not found");
         }
-        System.out.println("Login successful");
-        System.out.println(account);
         return new AccountPrincipal(account);
     }
 
