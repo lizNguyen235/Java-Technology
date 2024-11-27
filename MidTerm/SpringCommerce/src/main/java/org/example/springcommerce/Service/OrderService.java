@@ -27,6 +27,10 @@ public class OrderService {
         return orderRepo.findAllByUserId(id, PageRequest.of(page, size));
     }
 
+    public Page<MyOrder> getOrders(int page, int size) {
+        return orderRepo.findAll(PageRequest.of(page, size));
+    }
+
     public void deleteOrder(Long id, Long productId) {
         Product product = productRepo.findById(productId).get();
         MyOrder order = orderRepo.findById(id).get();

@@ -61,7 +61,7 @@ public class OrderController {
 
     @GetMapping("/odermanagement")
     public String orderManagement(@AuthenticationPrincipal AccountPrincipal accountPrincipal, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
-        Page<MyOrder> orderPage = orderService.getOrderByUserId(accountPrincipal.getId(), page, size);
+        Page<MyOrder> orderPage = orderService.getOrders(page, size);
         model.addAttribute("orders", orderPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", orderPage.getTotalPages());

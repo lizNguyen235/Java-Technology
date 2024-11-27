@@ -39,6 +39,9 @@
                         <span th:text="${username}"
                               th:style="'color: ' + (${role == 'ROLE_USER' ? 'blue' : (role == 'ROLE_ADMIN' ? 'red' : 'black')}) + '; font-weight: bold;'"></span>
                     </div>
+                    <form action="/logout" method="post" class="ms-3" >
+                        <button type="submit" class="btn btn-danger">Đăng xuất</button>
+                    </form>
             </div>
             </div>
         </nav>

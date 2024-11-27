@@ -34,13 +34,23 @@ public class MySecurityConfig {
                         .requestMatchers("/product/**","/odermanagement/**").hasRole("ADMIN") // chỉ cho phép người dùng có quyền ADMIN truy cập vào trang /product
                         .anyRequest().authenticated() // yêu cầu tất cả các yêu cầu đều cần xác thực
                 )
+                .rememberMe(rememberMeConfigurer -> rememberMeConfigurer
+                        .key("uniqueAndSecretKey") // Khóa bí mật để mã hóa
+                        .tokenValiditySeconds(7 * 24 * 60 * 60) // Thời gian tồn tại của cookie (7 ngày)
+                )
                 .formLogin(form -> form
                         .loginPage("/") // chỉ định trang đăng nhập tùy chỉnh
                         .loginProcessingUrl("/perform_login") // chỉ định endpoint entry để tíến hành xử lí
                         .permitAll() // cho phép mọi người truy cập vào trang đăng nhập
                         .successHandler(new SimpleUrlAuthenticationSuccessHandler("/home")) // sau khi đăng nhập thành công, chuyển hướng đến trang /login/home
                 )
-                .logout(LogoutConfigurer::permitAll); // cho phép mọi người thực hiện đăng xuất
+                .logout(logout -> logout
+                        .logoutUrl("/logout") // URL used for logout
+                        .logoutSuccessUrl("/") // Redirect after logout
+                        .deleteCookies("JSESSIONID") // Delete session cookie
+                        .invalidateHttpSession(true) // Invalidate session
+                        .permitAll() // Allow everyone to logout
+                );
         return http.build(); // trả về đối tượng SecurityFilterChain đã được cấu hình
     }
 
