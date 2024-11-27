@@ -1,6 +1,7 @@
-function confirmOrder(orderId) {
-    alert(orderId);
-    fetch(`/odermanagement/update/${orderId}`, {
+function confirmOrder(button) {
+    const orderId = button.getAttribute('data-id');
+    const status = button.getAttribute('data-status');
+    fetch(`/odermanagement/update/${orderId}?status=${status}`, {
         method: 'PUT'
     })
         .then(response => {

@@ -76,8 +76,13 @@ public class OrderController {
 
     @PutMapping("/odermanagement/update/{id}")
     @ResponseBody
-    public ResponseEntity<String> updateOrder(@PathVariable Long id) {
-        String status = "Delivered";
+    public ResponseEntity<String> updateOrder(@PathVariable Long id, @RequestParam String status) {
+        if(status.equals("pending")) {
+            status = "Delivered";
+        }
+        else {
+            status = "Success";
+        }
         orderService.updateOrder(id, status);
         return ResponseEntity.ok("Update order successfully");
     }

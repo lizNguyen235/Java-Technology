@@ -54,7 +54,7 @@
       <td th:text="${myOrder.total}">$0</td> <!-- Giá -->
       <td th:text="${myOrder.status}" ></td>
         <td>
-            <button type="button" class="btn btn-success" th:onclick="|confirmOrder(${myOrder.id})|">Xác Nhận</button>
+            <button type="button" class="btn btn-success" th:data-status="${myOrder.status}" th:data-id="${myOrder.id}" th:onclick="|confirmOrder(Button)|">Xác Nhận</button>
         </td>
     </tr>
     <tr th:if="${#lists.isEmpty(orders.content)}">
