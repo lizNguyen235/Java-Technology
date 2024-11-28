@@ -26,15 +26,4 @@ public class LoginController {
         return "redirect:/home";
     }
 
-    @GetMapping("/home")
-    public String accessHomePage(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        authentication.getAuthorities().forEach(authority -> {
-            model.addAttribute("role", authority.getAuthority());
-        });
-
-        model.addAttribute("username", authentication.getName());
-        return "homepage";
-    }
-
 }

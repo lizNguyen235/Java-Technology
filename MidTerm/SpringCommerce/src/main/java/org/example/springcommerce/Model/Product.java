@@ -17,14 +17,13 @@ public class Product {
     private String name;
     private String description;
     private double price;
-    @Lob
-    private byte[] image;
+    private String image;
     private int quantity;
     private String category;
     private String brand;
     private String color;
 
-    public Product(ProductDTO product, byte[] image) {
+    public Product(ProductDTO product, String image) {
         this.name = product.getName();
         this.description = product.getDescription();
         this.price = product.getPrice();
