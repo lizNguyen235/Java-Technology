@@ -61,10 +61,11 @@
                 <div class="col-auto">
                     <label for="category" class="form-label">Category:</label>
                     <select name="category" id="category" class="form-select">
-                        <option value="">All</option>
+                        <option value="All" th:selected="${selectedCategory == 'All'}">All</option>
                         <option th:each="category : ${categories}"
                                 th:value="${category}"
-                                th:text="${category}"></option>
+                                th:text="${category}"
+                                th:selected="${category == selectedCategory}"></option>
                     </select>
                 </div>
 
@@ -72,9 +73,9 @@
                 <div class="col-auto">
                     <label for="price_min" class="form-label">Price Range:</label>
                     <div class="input-group">
-                        <input type="number" name="minPrice" id="price_min" class="form-control" placeholder="Min Price">
+                        <input type="number" name="minPrice" id="price_min" class="form-control" placeholder="Min Price" th:value="${selectedMinPrice}">
                         <span class="input-group-text">-</span>
-                        <input type="number" name="maxPrice" id="price_max" class="form-control" placeholder="Max Price">
+                        <input type="number" name="maxPrice" id="price_max" class="form-control" placeholder="Max Price" th:value="${selectedMaxPrice}">
                     </div>
                 </div>
 
@@ -82,10 +83,11 @@
                 <div class="col-auto">
                     <label for="brand" class="form-label">Brand:</label>
                     <select name="brand" id="brand" class="form-select">
-                        <option value="">All</option>
+                        <option value="All" th:selected="${selectedBrand == 'All'}">All</option>
                         <option th:each="brand : ${brands}"
                                 th:value="${brand}"
-                                th:text="${brand}"></option>
+                                th:text="${brand}"
+                                th:selected="${brand == selectedBrand}"></option>
                     </select>
                 </div>
 
@@ -93,10 +95,11 @@
                 <div class="col-auto">
                     <label for="color" class="form-label">Color:</label>
                     <select name="color" id="color" class="form-select">
-                        <option value="">All</option>
+                        <option value="All" th:selected="${selectedColor == 'All'}">All</option>
                         <option th:each="color : ${colors}"
                                 th:value="${color}"
-                                th:text="${color}"></option>
+                                th:text="${color}"
+                                th:selected="${color == selectedColor}"></option>
                     </select>
                 </div>
 
@@ -115,7 +118,7 @@
                     <div class="col-md-5" th:each="product : ${productPage.content}">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" th:src="${product.image}" alt="Product image"/>
+                            <img class="card-img-top" th:src="@{'/uploads/' + ${product.image}}" alt="Product image"/>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">

@@ -48,6 +48,22 @@ public class HomeController {
         authentication.getAuthorities().forEach(authority -> {
             model.addAttribute("role", authority.getAuthority());
         });
+        if (category.isEmpty()) {
+            category = "All";
+        }
+        if (brand.isEmpty()) {
+            brand = "All";
+        }
+        if (color.isEmpty()) {
+            color = "All";
+        }
+
+        // Thêm giá trị category vào model
+        model.addAttribute("selectedCategory", category);
+        model.addAttribute("selectedColor", color);
+        model.addAttribute("selectedBrand", brand);
+        model.addAttribute("selectedMinPrice", minPrice);
+        model.addAttribute("selectedMaxPrice", maxPrice);
         Page<Product> productPage = productService.findAllByCondition(brand, color, category, minPrice, maxPrice, page, size);
         List<String> categories = productService.getCategories();
         model.addAttribute("categories", categories);
@@ -59,6 +75,6 @@ public class HomeController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
         model.addAttribute("username", authentication.getName());
-        return "Redirect:/home";
+        return "homepage";
     }
 }

@@ -26,17 +26,17 @@ public class ProductService  {
         return productRepo.findAll(PageRequest.of(page, size));
     }
 
-    public void deleteProduct(Long id) {
+    public void deleteProduct(Long id, String Folder) {
         Product product = productRepo.findById(id).get();
-        String filePath = product.getImage();
+        String filePath = Folder + product.getImage();
         File file = new File(filePath);
         file.delete();
         productRepo.deleteById(id);
     }
 
-    public void updateProduct(Product newProduct) {
+    public void updateProduct(Product newProduct, String Folder) {
         Product product = productRepo.findById(newProduct.getId()).get();
-        String filePath = product.getImage();
+        String filePath = Folder + product.getImage();
         File file = new File(filePath);
         file.delete();
         productRepo.save(newProduct);
@@ -61,6 +61,16 @@ public class ProductService  {
         if(maxPrice.isEmpty()) {
             maxPrice = "999999999";
         }
+        if(brand.equals("All")) {
+            brand = "";
+        }
+        if(color.equals("All")) {
+            color = "";
+        }
+        if(category.equals("All")) {
+            category = "";
+        }
+
         double max = Double.parseDouble(maxPrice);
         double min = Double.parseDouble(minPrice);
         if(brand.isEmpty() && !color.isEmpty() && !category.isEmpty()) {
