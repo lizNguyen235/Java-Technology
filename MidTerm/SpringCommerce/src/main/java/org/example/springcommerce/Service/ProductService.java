@@ -71,8 +71,8 @@ public class ProductService  {
             category = "";
         }
 
-        double max = Double.parseDouble(maxPrice);
-        double min = Double.parseDouble(minPrice);
+        int max = Integer.parseInt(maxPrice);
+        int min = Integer.parseInt(minPrice);
         if(brand.isEmpty() && !color.isEmpty() && !category.isEmpty()) {
             return productRepo.findAllByColorAndCategoryAndPriceBetween(color, category, min, max, PageRequest.of(page, size));
         }
@@ -95,5 +95,9 @@ public class ProductService  {
             return productRepo.findAllByPriceBetween(min, max, PageRequest.of(page, size));
         }
         return productRepo.findAllByBrandAndColorAndCategoryAndPriceBetween(brand, color, category, min, max, PageRequest.of(page, size));
+    }
+
+    public Product findById(Long id) {
+        return productRepo.findById(id).get();
     }
 }

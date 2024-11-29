@@ -19,11 +19,11 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     @Query("SELECT DISTINCT p.color FROM Product p")
     List<String> findDistinctColors();
     Page<Product> findAllByBrandAndColorAndCategoryAndPriceBetween(String brand, String color, String category, double minPrice, double maxPrice, Pageable pageable);
-    Page<Product> findAllByColorAndCategoryAndPriceBetween(String color, String category, double min, double max, Pageable pageable);
-    Page<Product> findAllByBrandAndCategoryAndPriceBetween(String brand, String category, double min, double max, Pageable pageable);
-    Page<Product> findAllByBrandAndColorAndPriceBetween(String brand, String color, double min, double max, Pageable pageable);
-    Page<Product> findAllByBrandAndPriceBetween(String brand, double min, double max, Pageable pageable);
-    Page<Product> findAllByColorAndPriceBetween(String color, double min, double max, Pageable pageable);
-    Page<Product> findAllByCategoryAndPriceBetween(String category, double min, double max, Pageable pageable);
-    Page<Product> findAllByPriceBetween(double min, double max, Pageable pageable);
+    Page<Product> findAllByColorAndCategoryAndPriceBetween(String color, String category, int min, int max, Pageable pageable);
+    Page<Product> findAllByBrandAndCategoryAndPriceBetween(String brand, String category, int min, int max, Pageable pageable);
+    Page<Product> findAllByBrandAndColorAndPriceBetween(String brand, String color, int min, int max, Pageable pageable);
+    Page<Product> findAllByBrandAndPriceBetween(String brand, int min, int max, Pageable pageable);
+    Page<Product> findAllByColorAndPriceBetween(String color, int min, int max, Pageable pageable);
+    Page<Product> findAllByCategoryAndPriceBetween(String category, int min, int max, Pageable pageable);
+    Page<Product> findAllByPriceBetween(int min, int max, Pageable pageable);
 }

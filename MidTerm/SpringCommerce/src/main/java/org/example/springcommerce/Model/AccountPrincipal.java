@@ -22,6 +22,10 @@ public class AccountPrincipal implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
+    public Long getId() {
+        return account.getId();
+    }
+
     @Override
     public String getPassword() {
         return account.getPassword();
