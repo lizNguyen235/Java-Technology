@@ -43,7 +43,6 @@ public class CartController {
     public String CartManagement(@AuthenticationPrincipal AccountPrincipal accountPrincipal, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
         Page<Cart> cartPage = cartService.getCartByUserId(accountPrincipal.getId(), page, size);
         model.addAttribute("carts", cartPage);
-        model.addAttribute("productPage", cartPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", cartPage.getTotalPages());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -52,5 +51,12 @@ public class CartController {
         });
         model.addAttribute("username", authentication.getName());
         return "cart";
+    }
+
+    @DeleteMapping("/cart/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<String> deleteCart(@PathVariable("id") Long id) {
+        cartService.deleteCart(id);
+        return ResponseEntity.ok("Delete cart successfully");
     }
 }

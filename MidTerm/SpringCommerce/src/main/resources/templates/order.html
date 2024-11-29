@@ -17,7 +17,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#" onclick="checkAccess(event)">Product</a></li>
-                <li class="nav-item"><a class="nav-link" href="/order">My Order</a></li>
             </ul>
 
         </div>
@@ -31,7 +30,7 @@
 </nav>
 <div class="col-md-8 mt-4 container" style="padding-top: 80px">
     <div class="d-flex justify-content-center align-items-center p-3" >
-        <h4 class="text-success">Giỏ Hàng Của Bạn</h4>
+        <h4 class="text-success">Đơn Hàng Của Bạn</h4>
     </div>
     <table class="table table-striped">
         <thead>
@@ -41,35 +40,24 @@
             <th>Giá</th>
             <th>Số lượng</th>
             <th>Tổng tiền</th>
-            <th>Thao tác</th>
+            <th>Trạng thái</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cart, stat : ${carts.content}">
+        <tr th:each="myOrder, stat : ${orders.content}">
             <td th:text="${stat.index + 1 + currentPage * 20}">1</td> <!-- Số thứ tự -->
-            <td th:text="${cart.name}">Tên sản phẩm</td>
-            <td th:text="${cart.price}">Danh mục</td>
-            <td th:text="${cart.quantity}">Giá</td>
-            <td th:text="${cart.total}">$0</td> <!-- Giá -->
-            <td>
-                <button type="button"
-                        th:onclick="|checkDelete(${cart.id})|"
-                        class="btn btn-outline-danger delete-btn">
-                    Xóa
-                </button>
-                <button type="button"
-                        th:onclick="|checkDelete(${cart.id})|"
-                        class="btn btn-success delete-btn">
-                    Mua hàng
-                </button>
-            </td>
+            <td th:text="${myOrder.name}">Tên sản phẩm</td>
+            <td th:text="${myOrder.price}">Danh mục</td>
+            <td th:text="${myOrder.quantity}">Giá</td>
+            <td th:text="${myOrder.total}">$0</td> <!-- Giá -->
+            <td th:text="${myOrder.status}" ></td>
         </tr>
-        <tr th:if="${#lists.isEmpty(carts.content)}">
-            <td colspan="5" class="text-center">Giỏ hàng không có sản phầm nào</td>
+        <tr th:if="${#lists.isEmpty(orders.content)}">
+            <td colspan="6" class="text-center">Bạn Chưa Đặt Hàng Sản Phẩm Nào</td>
         </tr>
         </tbody>
     </table>
-    <nav th:if="${!#lists.isEmpty(carts.content)}" aria-label="Page navigation">
+    <nav th:if="${!#lists.isEmpty(orders.content)}" aria-label="Page navigation">
         <ul class="pagination">
             <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
                 <a class="page-link" th:href="@{'/product?page=' + (${currentPage} - 1)}" aria-label="Previous">

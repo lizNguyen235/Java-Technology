@@ -20,4 +20,12 @@ public class CartService {
     public Page<Cart> getCartByUserId(Long id, int page, int size) {
         return cartRepo.findAllByUserId(id, PageRequest.of(page, size));
     }
+
+    public void deleteCart(Long id) {
+        cartRepo.deleteById(id);
+    }
+
+    public Cart findById(Long cartId) {
+        return cartRepo.findById(cartId).orElse(null);
+    }
 }

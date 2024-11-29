@@ -72,3 +72,61 @@ fetch(`/cart/add/${itemId}?quantity=${inputValue}`, {
         });
     });
 }
+
+const addressElement = document.getElementById("addressInput");
+let address = "";
+addressElement.addEventListener("input", function () {
+    address = addressElement.value;
+});
+function checkToOrder(maxQuantity) {
+    if (inputValue > maxQuantity) {
+        Swal.fire({
+            title: 'Lỗi', // Tiêu đề
+            text: 'Số lượng sản phẩm không đủ.', // Nội dung
+            icon: 'error', // Loại thông báo (có thể là 'warning', 'info', 'success', 'error')
+            confirmButtonText: 'OK' // Nút "OK"
+        });
+        return;
+    }
+    if(inputValue <= 0) {
+        Swal.fire({
+            title: 'Lỗi', // Tiêu đề
+            text: 'Số lượng sản phẩm không thể bằng 0 hoặc âm.', // Nội dung
+            icon: 'error', // Loại thông báo (có thể là 'warning', 'info', 'success', 'error')
+            confirmButtonText: 'OK' // Nút "OK"
+        });
+        return;
+    }
+    const emailModal = new bootstrap.Modal(document.getElementById('emailModal'));
+    emailModal.show();
+}
+
+function addToOrder(itemId) {
+
+// Gửi yêu cầu xóa đến server
+fetch(`/detail/order/add/${itemId}?quantity=${inputValue}&address=${address}`, {
+    method: 'POST'
+})
+    .then(response => {
+        if (response.ok) {
+            // Hiển thị thông báo thành công
+            Swal.fire({
+                title: 'Thêm Sản Phẩm Thành Công', // Tiêu đề
+                text: 'Vật phẩm đã được thêm thành công vui lòng vào giỏ hàng để kiểm tra lại.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
+                // Tải lại trang sau khi xóa
+                .then(() => window.location.reload());
+        } else {
+            // Hiển thị lỗi nếu có
+            alert(response.status);
+            Swal.fire({
+                title: 'Lỗi',
+                text: 'Không thể Thêm vật phẩm. Vui lòng thử lại sau.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    })
+}

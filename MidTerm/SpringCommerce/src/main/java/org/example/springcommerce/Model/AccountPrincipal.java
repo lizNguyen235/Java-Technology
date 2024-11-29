@@ -26,6 +26,10 @@ public class AccountPrincipal implements UserDetails {
         return account.getId();
     }
 
+    public String address() {
+        return account.getAddress();
+    }
+
     @Override
     public String getPassword() {
         return account.getPassword();

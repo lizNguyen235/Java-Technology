@@ -1,9 +1,11 @@
 package org.example.springcommerce.Controller;
 
+import org.example.springcommerce.Model.AccountPrincipal;
 import org.example.springcommerce.Model.Product;
 import org.example.springcommerce.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,7 @@ public class DetailController {
     @Autowired
     ProductService productService;
     @GetMapping("/detail/{id}")
-    public String accessDetailPage(Model model, @PathVariable("id") Long id) {
+    public String accessDetailPage(Model model, @PathVariable("id") Long id, @AuthenticationPrincipal AccountPrincipal accountPrincipal) {
         Product product = productService.findById(id); // Lấy dữ liệu sản phẩm từ service
         model.addAttribute("product", product);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -24,6 +26,7 @@ public class DetailController {
             model.addAttribute("role", authority.getAuthority());
         });
         model.addAttribute("username", authentication.getName());
+        model.addAttribute("address", accountPrincipal.address());
         return "detail";
     }
 }
