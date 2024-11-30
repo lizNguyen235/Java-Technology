@@ -51,7 +51,7 @@ function checkDelete(itemId) {
 const button = document.getElementById("edit-button");
 
 // Lấy dữ liệu từ thuộc tính data-product
-const productId = button.dataset.product;
+let productId = button.dataset.product;
 
 document.getElementById("edit-form").addEventListener("submit", function(event) {
     event.preventDefault(); // Ngăn form gửi dữ liệu theo cách mặc định

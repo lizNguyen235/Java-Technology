@@ -74,4 +74,11 @@ public class OrderController {
         return "ordermanagement";
     }
 
+
+    @DeleteMapping("/order/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<String> deleteOrder(@PathVariable Long id, @RequestParam Long productId) {
+        orderService.deleteOrder(id, productId);
+        return ResponseEntity.ok("Delete order successfully");
+    }
 }

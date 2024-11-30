@@ -16,7 +16,6 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#" onclick="checkAccess(event)">Product</a></li>
             </ul>
 
         </div>
@@ -36,6 +35,7 @@
         <thead>
         <tr>
             <th>STT</th>
+            <th>Mã Đơn Hàng</th>
             <th>Tên sản phẩm</th>
             <th>Giá</th>
             <th>Số lượng</th>
@@ -47,7 +47,8 @@
         </thead>
         <tbody>
         <tr th:each="myOrder, stat : ${orders.content}">
-            <td th:text="${stat.index + 1 + currentPage * 20}">1</td> <!-- Số thứ tự -->
+            <td th:text="${stat.index + 1 + currentPage * 20}">1</td><!-- Số thứ tự -->
+            <td th:text="${myOrder.id}">1</td>
             <td th:text="${myOrder.name}">Tên sản phẩm</td>
             <td th:text="${myOrder.price}">Danh mục</td>
             <td th:text="${myOrder.quantity}">Giá</td>
@@ -56,14 +57,17 @@
             <td th:text="${myOrder.address}" ></td>
             <td>
                 <button type="button"
-                        th:onclick="|checkDelete(${myOrder.id})|"
+                        th:data-id="${myOrder.id}"
+                        th:data-status="${myOrder.status}"
+                        th:data-product="${myOrder.productId}"
+                        onclick="checkDelete(this)"
                         class="btn btn-outline-danger delete-btn">
                     Xóa
                 </button>
             </td>
         </tr>
         <tr th:if="${#lists.isEmpty(orders.content)}">
-            <td colspan="7" class="text-center">Bạn Chưa Đặt Hàng Sản Phẩm Nào</td>
+            <td colspan="10" class="text-center">Bạn Chưa Đặt Hàng Sản Phẩm Nào</td>
         </tr>
         </tbody>
     </table>
@@ -86,4 +90,5 @@
     </nav>
 </div>
 </body>
+<script src="/Order/js/scripts.js"></script>
 </html>
