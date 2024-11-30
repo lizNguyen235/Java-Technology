@@ -34,4 +34,5 @@ public class Product {
         this.color = product.getColor();
         this.image = image;
     }
+
 }
