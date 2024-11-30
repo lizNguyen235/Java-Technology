@@ -26,7 +26,7 @@ public class OrderController {
     @Autowired
     ProductService productService;
     @GetMapping("/order")
-    public String orderManagement(@AuthenticationPrincipal AccountPrincipal accountPrincipal, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
+    public String order(@AuthenticationPrincipal AccountPrincipal accountPrincipal, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
         Page<MyOrder> orderPage = orderService.getOrderByUserId(accountPrincipal.getId(), page, size);
         model.addAttribute("orders", orderPage);
         model.addAttribute("currentPage", page);
@@ -57,6 +57,21 @@ public class OrderController {
         MyOrder myOrder = new MyOrder(product, quantity, accountPrincipal.getId(), address);
         orderService.addToOrder(myOrder);
         return ResponseEntity.ok("Add to order successfully");
+    }
+
+    @GetMapping("/odermanagement")
+    public String orderManagement(@AuthenticationPrincipal AccountPrincipal accountPrincipal, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
+        Page<MyOrder> orderPage = orderService.getOrderByUserId(accountPrincipal.getId(), page, size);
+        model.addAttribute("orders", orderPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", orderPage.getTotalPages());
+        model.addAttribute("address", accountPrincipal.address());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        authentication.getAuthorities().forEach(authority -> {
+            model.addAttribute("role", authority.getAuthority());
+        });
+        model.addAttribute("username", authentication.getName());
+        return "ordermanagement";
     }
 
 }
