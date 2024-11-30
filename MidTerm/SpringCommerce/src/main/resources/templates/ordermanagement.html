@@ -53,10 +53,12 @@
       <td th:text="${myOrder.quantity}">Giá</td>
       <td th:text="${myOrder.total}">$0</td> <!-- Giá -->
       <td th:text="${myOrder.status}" ></td>
-
+        <td>
+            <button type="button" class="btn btn-success" th:onclick="|confirmOrder(${myOrder.id})|">Xác Nhận</button>
+        </td>
     </tr>
     <tr th:if="${#lists.isEmpty(orders.content)}">
-      <td colspan="6" class="text-center">Không Có Đơn Hàng Nào</td>
+      <td colspan="7" class="text-center">Không Có Đơn Hàng Nào</td>
     </tr>
     </tbody>
   </table>
@@ -79,5 +81,5 @@
   </nav>
 </div>
 </body>
-<script src="/Cart/js/scripts.js"></script>
+<script src="/OrderManagement/js/scripts.js"></script>
 </html>

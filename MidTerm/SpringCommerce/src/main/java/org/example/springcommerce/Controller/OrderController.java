@@ -74,6 +74,14 @@ public class OrderController {
         return "ordermanagement";
     }
 
+    @PutMapping("/odermanagement/update/{id}")
+    @ResponseBody
+    public ResponseEntity<String> updateOrder(@PathVariable Long id) {
+        String status = "Delivered";
+        orderService.updateOrder(id, status);
+        return ResponseEntity.ok("Update order successfully");
+    }
+
 
     @DeleteMapping("/order/delete/{id}")
     @ResponseBody

@@ -34,4 +34,10 @@ public class OrderService {
         productRepo.save(product);
         orderRepo.deleteById(id);
     }
+
+    public void updateOrder(Long id, String status) {
+        MyOrder order = orderRepo.findById(id).get();
+        order.setStatus(status);
+        orderRepo.save(order);
+    }
 }
