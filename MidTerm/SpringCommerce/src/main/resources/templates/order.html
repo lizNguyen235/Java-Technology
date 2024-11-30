@@ -41,6 +41,8 @@
             <th>Số lượng</th>
             <th>Tổng tiền</th>
             <th>Trạng thái</th>
+            <th>Địa chỉ</th>
+            <th>Thao Tác</th>
         </tr>
         </thead>
         <tbody>
@@ -51,9 +53,17 @@
             <td th:text="${myOrder.quantity}">Giá</td>
             <td th:text="${myOrder.total}">$0</td> <!-- Giá -->
             <td th:text="${myOrder.status}" ></td>
+            <td th:text="${myOrder.address}" ></td>
+            <td>
+                <button type="button"
+                        th:onclick="|checkDelete(${myOrder.id})|"
+                        class="btn btn-outline-danger delete-btn">
+                    Xóa
+                </button>
+            </td>
         </tr>
         <tr th:if="${#lists.isEmpty(orders.content)}">
-            <td colspan="6" class="text-center">Bạn Chưa Đặt Hàng Sản Phẩm Nào</td>
+            <td colspan="7" class="text-center">Bạn Chưa Đặt Hàng Sản Phẩm Nào</td>
         </tr>
         </tbody>
     </table>
@@ -76,5 +86,4 @@
     </nav>
 </div>
 </body>
-<script src="/Cart/js/scripts.js"></script>
 </html>

@@ -33,6 +33,11 @@
     <div class="d-flex justify-content-center align-items-center p-3" >
         <h4 class="text-success">Giỏ Hàng Của Bạn</h4>
     </div>
+    <div class="flex-column align-items-start p-3">
+        <label for="address" class="mb-2">Nhập địa chỉ:</label>
+        <input th:value="${address}" type="text" id="address" class="form-control" placeholder="Nhập địa chỉ của bạn" style="width: 300px;">
+    </div>
+
     <table class="table table-striped">
         <thead>
         <tr>
@@ -58,14 +63,14 @@
                     Xóa
                 </button>
                 <button type="button"
-                        th:onclick="|checkDelete(${cart.id})|"
+                        th:onclick="|checkOrder(${cart.id})|"
                         class="btn btn-success delete-btn">
                     Mua hàng
                 </button>
             </td>
         </tr>
         <tr th:if="${#lists.isEmpty(carts.content)}">
-            <td colspan="5" class="text-center">Giỏ hàng không có sản phầm nào</td>
+            <td colspan="6" class="text-center">Giỏ hàng không có sản phầm nào</td>
         </tr>
         </tbody>
     </table>

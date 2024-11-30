@@ -45,6 +45,7 @@ public class OrderController {
     public ResponseEntity<String> addToOrder(@RequestParam Long cartId, @RequestParam String address) {
         Cart cart = cartService.findById(cartId);
         MyOrder myOrder = new MyOrder(cart,address);
+        cartService.deleteCart(cartId);
         orderService.addToOrder(myOrder);
         return ResponseEntity.ok("Add to order successfully");
     }

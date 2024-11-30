@@ -74,7 +74,7 @@ fetch(`/cart/add/${itemId}?quantity=${inputValue}`, {
 }
 
 const addressElement = document.getElementById("addressInput");
-let address = "";
+let address = addressElement.value;
 addressElement.addEventListener("input", function () {
     address = addressElement.value;
 });
@@ -102,7 +102,6 @@ function checkToOrder(maxQuantity) {
 }
 
 function addToOrder(itemId) {
-
 // Gửi yêu cầu xóa đến server
 fetch(`/detail/order/add/${itemId}?quantity=${inputValue}&address=${address}`, {
     method: 'POST'

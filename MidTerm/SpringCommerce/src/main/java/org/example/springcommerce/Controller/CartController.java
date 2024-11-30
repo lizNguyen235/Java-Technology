@@ -49,6 +49,7 @@ public class CartController {
         authentication.getAuthorities().forEach(authority -> {
             model.addAttribute("role", authority.getAuthority());
         });
+        model.addAttribute("address", accountPrincipal.address());
         model.addAttribute("username", authentication.getName());
         return "cart";
     }
